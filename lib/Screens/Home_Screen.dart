@@ -342,8 +342,6 @@ class _HomeScreenState extends State<HomeScreen> {
         key: _scaffoldKey,
         body: Stack(
           children: <Widget>[
-            Text('You have logged in Successfuly'),
-            SizedBox(height: 50),
             // Map View
             GoogleMap(
               markers: Set<Marker>.from(markers),
