@@ -5,6 +5,7 @@ import 'package:flutter_polyline_points/flutter_polyline_points.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:safetyapp/Screens/Login_Screen.dart';
 
 import 'dart:math' show cos, sqrt, asin;
 
@@ -319,9 +320,30 @@ class _HomeScreenState extends State<HomeScreen> {
       height: height,
       width: width,
       child: Scaffold(
+        appBar: AppBar(
+          title: Text('Safety App'),
+          actions: <Widget>[
+            IconButton(
+              icon: Icon(Icons.logout),
+              onPressed: () async {
+                await _signOut();
+                if (_firebaseAuth.currentUser == null) {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => LoginScreen(),
+                    ),
+                  );
+                }
+              },
+            ),
+          ],
+        ),
         key: _scaffoldKey,
         body: Stack(
           children: <Widget>[
+            Text('You have logged in Successfuly'),
+            SizedBox(height: 50),
             // Map View
             GoogleMap(
               markers: Set<Marker>.from(markers),
